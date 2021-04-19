@@ -16,6 +16,8 @@ namespace _30_csharp_rawinput
     {
         public Form1()
         {
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
             InitializeComponent();
             AllocConsole();
         }
