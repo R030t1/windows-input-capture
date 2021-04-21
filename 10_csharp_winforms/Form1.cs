@@ -15,7 +15,7 @@ namespace _10_csharp_winforms
 
         protected override void WndProc(ref Message m)
         {
-            Console.WriteLine((WindowMessage)m.Msg);
+            Console.WriteLine(m);
             base.WndProc(ref m);
         }
     }
