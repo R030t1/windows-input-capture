@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static PInvoke.Kernel32;
 using static PInvoke.User32;
@@ -63,18 +56,26 @@ namespace _40_csharp_dummy
 
         int LLKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            var kb = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
+            var kb = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(
+                lParam, typeof(KBDLLHOOKSTRUCT));
             Console.WriteLine("a");
             
-            return CallNextHookEx(llkb.DangerousGetHandle(), nCode, wParam, lParam);
+            return CallNextHookEx(
+                llkb.DangerousGetHandle(),
+                nCode, wParam, lParam
+            );
         }
 
         int LLMouseProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            var ms = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
+            var ms = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(
+                lParam, typeof(MSLLHOOKSTRUCT));
             Console.WriteLine("b");
             
-            return CallNextHookEx(llms.DangerousGetHandle(), nCode, wParam, lParam);
+            return CallNextHookEx(
+                llms.DangerousGetHandle(),
+                nCode, wParam, lParam
+            );
         }
 
         void RawInputProc(ref Message m)
