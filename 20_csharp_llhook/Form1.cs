@@ -49,20 +49,20 @@ namespace _20_csharp_llhook
         {
             InitializeComponent();
             AllocConsole();
-            mouse = SetWindowsHookEx(WindowsHookType.WH_KEYBOARD_LL, llKeyboard, 
+            mouse = SetWindowsHookEx(WindowsHookType.WH_KEYBOARD_LL, LLKeyboardProc, 
                 GetModuleHandle(null), 0);
-            keyboard = SetWindowsHookEx(WindowsHookType.WH_MOUSE_LL, llMouse,
+            keyboard = SetWindowsHookEx(WindowsHookType.WH_MOUSE_LL, LLMouseProc,
                 GetModuleHandle(null), 0);
         }
 
-        int llKeyboard(int nCode, IntPtr wParam, IntPtr lParam)
+        int LLKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             var kbll = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
             Console.WriteLine((WindowMessage)wParam + " " + kbll.flags + " " + kbll.dwExtraInfo);
             return CallNextHookEx(keyboard.DangerousGetHandle(), nCode, wParam, lParam);
         }
 
-        int llMouse(int nCode, IntPtr wParam, IntPtr lParam)
+        int LLMouseProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
             var msll = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
             Console.WriteLine((WindowMessage)wParam + " " + msll.pt.X + " " + msll.pt.Y);
